@@ -1,24 +1,15 @@
-//7, to conect to fiberbase later
+//Purpose: connect to database
 
-import { firebaseDB } from "@/config/firebaseConfigi"; 
-import {ref, get} from 'firebase/database';
+import { supabase } from "@/config/superbaseConfig";
 import { Product } from "@/types/types";
 
-const productRef = ref(firebaseDB, 'products');
-
 const fetchProducts = async (): Promise<Product[]> => {
-    const snapshot = await get(productRef);
-    const data = snapshot.val();
-    const products: Product[] = [];
-        if (data) {
-            for (const key in data) {
-                if (data.hasOwnProperty(key)) { 
-                    products.push({... data[key] });
-                }
-            }
-        }
-    return products;
-    }
+    const { data, error } = await supabase
+        .from("products") 
+        .select("*");
 
-export {fetchProducts}
-// done 7.13
+    return data as Product[];
+};
+
+export { fetchProducts };
+// Completed 7.13

@@ -10,7 +10,8 @@ export interface Product {
     rating: number;
 }
 
-export interface ProductCategory{ //8.26
+// created 8.26
+export interface ProductCategory{ 
     id:string,
     selected: boolean,
 }

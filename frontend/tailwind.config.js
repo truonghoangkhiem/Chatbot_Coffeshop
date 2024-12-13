@@ -1,11 +1,14 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    './App.{js,jsx,ts,tsx}',
-    './components/**/*.{js,jsx,ts,tsx}',
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-};
+// create 7,50
+/** @type {import('tailwindcss").Config} */
+    module.exports = {
+        content: ["./app/**/*.{js,jsx, ts, tsx}", "./components/**/*.{js, jsx, ts, tsx}" ],
+        theme: {
+            extend: { 
+                colors: {
+                app_orange_color: "#C67C4E",
+            },
+        },
+    },
+plugins: [],
+}
+
