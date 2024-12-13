@@ -1,11 +1,12 @@
-/// <reference types="nativewind/types" />
+import { CartProvider } from '@/components/Cartcontext';
+import { Stack } from 'expo-router/stack';
+import { RootSiblingParent } from 'react-native-root-siblings';
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
-import { NativeWindStyleSheet } from "nativewind";
+import { NativeWindStyleSheet} from 'nativewind';
 
 NativeWindStyleSheet.setOutput({
-  default: "native",
-});
+    default: 'native'
+})
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -14,12 +15,26 @@ export default function RootLayout() {
     "Sora-Bold": require("../assets/fonts/Sora-Bold.ttf"),
   });
 
+  if (!fontsLoaded) {
+    return undefined;
+  }
+
   return (
-    <Stack>
-      <Stack.Screen
-        name="index"
-        options={{ headerShown: false }}
-      />
-    </Stack>
+    <CartProvider>
+      <RootSiblingParent>
+        <Stack>
+          <Stack.Screen name="index" 
+          options={{ headerShown: false }}
+          />
+          <Stack.Screen name="details" 
+          options={{ headerShown: true }}
+          />
+          <Stack.Screen name="thankyou"
+          options={{ headerShown: false }}
+          />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
+      </RootSiblingParent>
+    </CartProvider>
   );
 }
