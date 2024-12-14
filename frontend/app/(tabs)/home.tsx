@@ -1,21 +1,54 @@
 import { Text, View, FlatList, StatusBar, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '@/services/productService';
-import { Product } from '@/types/types';
+import { Product, ProductCategory } from '@/types/types';
 import { GestureHandlerRootView, TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import SearchArea from '@/components/SearchArea'; 
+import Banner from '@/components/Banner';     
 
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [shownProducts, setShownProducts] = useState<Product[]>([]);
+  const [productCategories, setProductCatgories] = useState<ProductCategory[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+
   const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const uniqueCategories = Array.from((productCategories)).map((category) => ({
+      id: category.id,
+      selected: selectedCategory === category.id,
+    }));
+    setProductCatgories(uniqueCategories);
+
+    if (selectedCategory === 'All') {
+      setShownProducts(products);
+    } else {
+      const filteredProducts = products.filter((product) => product.category === selectedCategory);
+      setShownProducts(filteredProducts);
+    }
+
+  }, [selectedCategory]);
 
   useEffect(() => {
     const loadProducts = async () => {
       try {
         const productsData = await fetchProducts();
+
+        const categories = productsData.map((product) => product.category);
+        categories.unshift('All');
+
+        const uniqueCategories = Array.from(new Set(categories)).map((category) => ({
+          id: category,
+          selected: selectedCategory === category,
+        }));
+        
+        setProductCatgories(uniqueCategories);
         setProducts(productsData);
+        setProductCatgories(uniqueCategories);
+        
       } catch (err) {
         console.error(err);
       } finally {
@@ -37,7 +70,7 @@ const Home = () => {
           columnWrapperStyle={{ justifyContent: 'space-between', marginLeft: 15, marginRight: 15 }}
           numColumns={2}
           keyExtractor={(item, index) => index.toString()}
-          data={products}
+          data={shownProducts}
           renderItem={({ item }) => (
               <View className='w-[48%] mt-2 bg-white rounded-2xl p-2 flex justify-between'>
                 <TouchableOpacity>
@@ -77,6 +110,30 @@ const Home = () => {
           ListHeaderComponent = {()=> (
             <View className='flex'>
               <SearchArea />
+              <Banner/>
+
+              <View
+                className='flex items-center'
+              >
+                <FlatList 
+                  className='mt-6 w-[90%] mb-2'
+                  data = {productCategories}
+                  horizontal={true}
+                  renderItem={({item}) => (
+                    <TouchableOpacity
+                      onPress={() => setSelectedCategory(item.id)}
+                    >
+                      <Text
+                        className={`text-sm mr-4 font-[Sora-Regular] p-3 rounded-lg 
+                          ${item.selected ? 'text-white' : 'text-[#313131]'}
+                          ${item.selected ? 'bg-app_orange_color ' : 'bg-[#EDEDED] '}
+                          `}
+                        >{item.id}
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
             </View>
           )}
         />
