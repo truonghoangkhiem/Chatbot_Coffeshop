@@ -70,7 +70,6 @@ const Home = () => {
 const addButton = (name: string) => {
   try {
     addToCart(name, 1);
-    console.log("it works");
     Toast.show(`${name} added to cart`, { duration: Toast.durations.SHORT });
   } catch (error) {
     console.error("An error occurred while adding to cart:", error);
