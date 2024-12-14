@@ -7,8 +7,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import SearchArea from '@/components/SearchArea'; 
 import Banner from '@/components/Banner';     
+import { router } from 'expo-router';
+import { useCart } from '@/components/CartContext';
+import Toast from 'react-native-root-toast';
 
 const Home = () => {
+  const {addToCart, cartItems } = useCart();
+
   const [products, setProducts] = useState<Product[]>([]);
   const [shownProducts, setShownProducts] = useState<Product[]>([]);
   const [productCategories, setProductCatgories] = useState<ProductCategory[]>([]);
@@ -61,6 +66,17 @@ const Home = () => {
 
   if (loading) return <Text>Loading...</Text>;
 
+//them nut add button
+const addButton = (name: string) => {
+  try {
+    addToCart(name, 1);
+    console.log("it works");
+    Toast.show(`${name} added to cart`, { duration: Toast.durations.SHORT });
+  } catch (error) {
+    console.error("An error occurred while adding to cart:", error);
+    Toast.show("An error occurred. Please try again.", { duration: Toast.durations.SHORT });
+  }
+};
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -72,8 +88,20 @@ const Home = () => {
           keyExtractor={(item, index) => index.toString()}
           data={shownProducts}
           renderItem={({ item }) => (
+
               <View className='w-[48%] mt-2 bg-white rounded-2xl p-2 flex justify-between'>
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => { 
+                      router.push( { pathname: '/details', params: {
+                        name: item.name, 
+                        image_path: item.image_path,
+                        type: item.category, 
+                        price: item.price,
+                        rating: item.rating,
+                        description: item.description,}} ) 
+                      }
+                    }
+                  >
                   <Image
                     source={{ uri: `${process.env.EXPO_PUBLIC_SUPABASE_URL}/storage/v1/object/public/product-images/${item.image_path}`}}
                     className='w-full h-32 rounded-2xl'
@@ -94,8 +122,7 @@ const Home = () => {
                   >
                     ${item.price}
                   </Text>
-                  
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => addButton(item.name)}>
                       <View
                         className='mr-2 p-2 -mt-1 bg-app_orange_color rounded-xl'
                       >
@@ -143,3 +170,4 @@ const Home = () => {
 };
 
 export default Home;
+
