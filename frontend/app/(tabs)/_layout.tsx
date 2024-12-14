@@ -1,6 +1,8 @@
 import { Text, View } from 'react-native';
 import React from 'react';
 import { Tabs } from 'expo-router';
+import Entypo from '@expo/vector-icons/Entypo';
+import { FontAwesome6 } from '@expo/vector-icons';
 
 const TabsLayout = () => {
   return (
@@ -15,6 +17,9 @@ const TabsLayout = () => {
             options={{
               headerShown: false,
               title: 'Home',
+              tabBarIcon: ({color}) => (
+                <Entypo name="home" size={24} color={color} />
+              )
             }}
           />
 
@@ -24,6 +29,9 @@ const TabsLayout = () => {
               headerShown: true,
               tabBarStyle: { display: 'none' },
               title: 'Chat Bot',
+              tabBarIcon: ({color }) => (
+                <FontAwesome6 name="robot" size={24} color={color} />
+              )
             }}
           />
 
@@ -33,6 +41,9 @@ const TabsLayout = () => {
               headerShown: true,
               tabBarStyle: { display: 'none' },
               title: 'Cart',
+              tabBarIcon: ({color}) => (
+                <Entypo name="shopping-cart" size={24} color={color} />
+              )
             }}
           />
         </Tabs>

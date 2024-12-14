@@ -14,6 +14,10 @@ export default function RootLayout() {
     "Sora-Bold": require("../assets/fonts/Sora-Bold.ttf"),
   });
 
+  if (!fontsLoaded) {
+    return undefined;
+  }
+
   return (
     <Stack>
       <Stack.Screen
