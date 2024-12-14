@@ -1,31 +1,37 @@
 /// <reference types="nativewind/types" />
-import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
-import { NativeWindStyleSheet } from "nativewind";
+import { Text, View,SafeAreaView, ImageBackground  } from "react-native";
+import { GestureHandlerRootView, TouchableOpacity } from "react-native-gesture-handler";
+import {router} from "expo-router";
 
-NativeWindStyleSheet.setOutput({
-    default: "native",
-});
 
-export default function RootLayout() {
-    const [fontsLoaded] = useFonts({
-        "Sora-Regular": require("@/assets/fonts/Sora-Regular.ttf"),
-        "Sora-SemiBold": require("@/assets/fonts/Sora-SemiBold.ttf"),
-        "Sora-Bold": require("@/assets/fonts/Sora-Bold.ttf"),
-    });
+export default function Index() {
 
-    if (!fontsLoaded) { 
-        return undefined;
-    }
-    return (
-        <Stack>
-            <Stack.Screen name="index"
-                options={{ headerShown: false }}
-            />
-            <
-            Stack.Screen name="(tabs)"             
-            options = {{headerShown:false}}
-            />
-        </Stack>
-    );
+  return (
+    <GestureHandlerRootView>
+      <SafeAreaView className="w-full h-full">
+      
+        <ImageBackground 
+          style={{ width: '100%', height: '100%', alignItems: 'center' }}
+          source={require('../assets/images/index_bg_image.png')}
+        >
+          <View className="flex h-[60%]" />
+          <View className="flex w-[80%]">
+                <Text className="text-white text-3xl text-center font-Sora-SemiBold">
+                Fall in Love with Coffee in Blissful Delight!
+                </Text>
+
+                <Text className="pt-3 text-[#A2A2A2] text-center font-Sora-Regular">
+                Welcome to our cozy coffee corner, where every cup is a delight for you.
+                </Text>
+              <TouchableOpacity 
+                className="bg-[#C57C3E] mt-10 p-3 rounded-lg items-center" 
+                onPress = {() => router.push("/(tabs)/home")}
+              >
+                <Text className="text-xl color-white font-Sora-SemiBold">Get Started</Text> 
+              </TouchableOpacity> 
+          </View>
+        </ImageBackground>
+      </SafeAreaView>
+    </GestureHandlerRootView>
+  );
 }
