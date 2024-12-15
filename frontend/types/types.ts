@@ -11,3 +11,9 @@ export interface ProductCategory{
     id:string,
     selected: boolean,
 }
+
+export interface MessageInterface {
+    role: string;
+    content: string;
+    memory?: any;
+}

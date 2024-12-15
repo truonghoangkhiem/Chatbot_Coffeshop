@@ -23,7 +23,7 @@ const DetailsPage = () => {
   };
 
   //them nut buy now 
-  const buyNow = (name: string) => {
+  const buyNow = () => {
     try {
       addToCart(name, 1);
       Toast.show(`${name} added to cart`, { duration: Toast.durations.SHORT });
@@ -52,7 +52,9 @@ const DetailsPage = () => {
             <Text className="text-app_orange_color text-2xl font-[Sora-SemiBold]">$ {price}</Text>
           </View>
 
-          <TouchableOpacity className="bg-app_orange_color w-[70%] rounded-3xl items-center justify-center">
+          <TouchableOpacity className="bg-app_orange_color w-[70%] rounded-3xl items-center justify-center"
+            onPress = {buyNow}
+          >
             <Text className="text-xl text-white font-[Sora-Regular]">Buy Now</Text>
           </TouchableOpacity>
         </View>

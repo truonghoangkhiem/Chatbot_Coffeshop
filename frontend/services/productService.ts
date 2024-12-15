@@ -1,6 +1,7 @@
 import { supabase } from "@/config/supabaseConfig"; 
 import { Product } from "@/types/types";
 
+console.log('supabase', supabase)
 const fetchProducts = async (): Promise<Product[]> => {
   const { data, error } = await supabase.from('products').select('*');
 
