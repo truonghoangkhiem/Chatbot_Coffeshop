@@ -8,6 +8,6 @@
 2. Chạy
 
    ```bash
-    npx expo start
+   npx expo start --tunnel
    ```
 
