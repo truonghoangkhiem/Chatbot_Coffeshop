@@ -16,7 +16,7 @@ const DetailsHeader = ({ image_path, name, type, rating }: DetailsHeaderInterfac
   return (
     <>
       {/* Image Section */}
-      <Image source={{ uri: image_path}} className="w-full h-48 rounded-2xl mt-2" />
+      <Image source={{ uri: `${process.env.EXPO_PUBLIC_SUPABASE_URL}/storage/v1/object/public/product-images/${image_path}`}} className="w-full h-48 rounded-2xl mt-2" />
 
       {/* Details Section */}
       <View className="mt-4 px-2">
