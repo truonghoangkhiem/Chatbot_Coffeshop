@@ -3,4 +3,8 @@ python-dotenv==1.0.1
 pinecone==5.3.1
 supabase
 mlxtend==0.23.1
-openai==1.50.2
+openai==1.57.4
+runpod==1.7.7
+
+
+
