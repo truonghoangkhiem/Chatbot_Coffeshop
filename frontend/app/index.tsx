@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, SafeAreaView, ImageBackground, View } from 'react-native';
+import { ImageBackground } from 'expo-image';
+import { Text, SafeAreaView, View } from 'react-native';
 import { TouchableOpacity, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { router } from 'expo-router';
 

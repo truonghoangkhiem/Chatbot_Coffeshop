@@ -1,4 +1,5 @@
-import { Text, View, FlatList, StatusBar, Image } from 'react-native';
+import { Text, View, FlatList, StatusBar } from 'react-native';
+import { Image } from 'expo-image';
 import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '@/services/productService';
 import { Product, ProductCategory } from '@/types/types';
