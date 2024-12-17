@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "frontend",
+    "slug": "frontend",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -24,6 +24,8 @@
     },
     "plugins": [
       "expo-router",
+      "expo-font",
+      "expo-asset",
       [
         "expo-splash-screen",
         {

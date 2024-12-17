@@ -3,13 +3,10 @@ module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      fontFamily: {
-        'Sora-Regular': ["Sora-Regular"],
-        'Sora-SemiBold': ["Sora-SemiBold"],
-        'Sora-Bold': ["Sora-Bold"],
+      colors: {
+        app_orange_color: '#C67C4E',
       },
     },
   },
   plugins: [],
-};
-
+}

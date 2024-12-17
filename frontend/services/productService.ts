@@ -1,15 +1,17 @@
-//Purpose: connect to database
-
-import { supabase } from "@/config/superbaseConfig";
+import { supabase } from "@/config/supabaseConfig"; 
 import { Product } from "@/types/types";
 
+console.log('supabase', supabase)
 const fetchProducts = async (): Promise<Product[]> => {
-    const { data, error } = await supabase
-        .from("products") 
-        .select("*");
+  const { data, error } = await supabase.from('products').select('*');
 
-    return data as Product[];
+  if (error) {
+    console.error('Error fetching products:', error);
+    return [];
+  }
+
+  return data as Product[];
 };
 
 export { fetchProducts };
-// Completed 7.13
+
