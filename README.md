@@ -26,7 +26,7 @@ The chatbot is built with cutting-edge AI methodologies, including **Prompt Engi
 
 - **OpenAI** for advancements in language models.
 - **RunPod** for efficient AI model deployment.
-- **Firebase** for seamless backend integration.
+- **Supabase** for seamless backend integration.
 - **React Native** for enabling cross-platform mobile app development.
 
 ---

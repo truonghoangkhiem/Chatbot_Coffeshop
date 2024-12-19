@@ -1,5 +1,6 @@
 import React from 'react';
-import { FlatList, Text, View, Image } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
+import { Image } from 'expo-image';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { Product } from '@/types/types';

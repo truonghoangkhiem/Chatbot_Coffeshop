@@ -50,9 +50,9 @@ const Home = () => {
           id: category,
           selected: selectedCategory === category,
         }));
-        
-        setProductCatgories(uniqueCategories);
+
         setProducts(productsData);
+        setShownProducts(productsData);
         setProductCatgories(uniqueCategories);
         
       } catch (err) {
