@@ -9,6 +9,7 @@ from agents import (
 from typing import Dict
 import os
 import pathlib
+import re
 
 folder_path = pathlib.Path(__file__).parent.resolve()
 
@@ -52,6 +53,7 @@ def main():
         classification_agent_response = clssification_agent.get_response(messages)
 
         chosen_agent = classification_agent_response["memory"]["classification_decision"]
+        print("Chosen Agent: ", chosen_agent)
 
         # Get response from chosen agent
         agent = agent_dict[chosen_agent]

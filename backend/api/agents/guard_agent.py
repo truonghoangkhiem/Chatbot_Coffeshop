@@ -30,18 +30,30 @@ class GuardAgent:
             
              The user is NOT allowed to:
             1. Ask questions about anything else other than our coffee shop.
-            2. Ask questions about the staff or how to make a certain menue item.
+            2. Ask questions about the staff or how to make a certain menu item.
+            
+            Your output must strictly follow the JSON format:
+            - Do NOT include any text like "Here is the response in the required JSON format."
+            - Do NOT include Markdown formatting like ``` or any extra line breaks outside JSON.
+            - All keys and string values must be enclosed in double quotes (`"`).
+            - Single quotes (`'`) are allowed inside string values as part of the content, e.g., `"John's book"` is valid.
+            - Do not include single quotes to define JSON keys or string values. Only use double quotes for these purposes.
+            - Escape any double quotes (`"`) that appear inside string values using a backslash (`\"`).
+            - Do not include any additional text outside the JSON structure.
+            - Your output must start with `{` and end with `}`.
+            - Do NOT add any extra newline characters before or after the JSON.
+
 
              Your output should be in a structured json format like so. each key is a string and each value is a string. Make sure to follow the format exactly:
              {
             "chain of thought": "go over each of the points above and make see if the message lies under this point or not. Then you write some your thoughts about what point is this input relevant to."
             "decision": "allowed" or "not allowed". Pick one of those. and only write the word.
-            "message": leave the message empty "" if it's allowed, otherwise write "Sorry, I can't help with that. Can I help you with your order?"
+            "message": leave the message empty if it's allowed, otherwise write "Sorry, I can't help with that. Can I help you with your order?"
             }
             
             """
 
-        input_messages = [{"role": "sysytem", "content": system_prompt}] + messages[-3:]
+        input_messages = [{"role": "system", "content": system_prompt}] + messages[-3:]
 
         chatbot_output = get_chatbot_response(self.client, self.model_name, input_messages)
         #chatbot_output = double_check_json_output(self.client, self.model_name, chatbot_output)
@@ -50,13 +62,24 @@ class GuardAgent:
         return output
 
     def postprocess(self, output):
-        output = json.loads(output)
-
+        try:
+            output = output.strip()  # Thử chuyển đổi chuỗi JSON thành object
+            output = output.replace("'", "'")
+            if not output.endswith("}"):
+                output += "}"
+            json_object = json.loads(output)
+        except json.JSONDecodeError as e:
+            print(f"JSON Decode Error: {e}")
+            print(f"Invalid JSON received: {output}")
+            raise ValueError("Invalid JSON format from chatbot")
+        
         dict_output = {
             "role": "assistant",
-            "content": output["message"],
-            "memory": {"agent": "guard_agent", 
-                       "guard_decision": output["decision"]},
+            "content": json_object.get("message", ""),
+            "memory": {
+                "agent": "guard_agent",
+                "guard_decision": json_object.get("decision", "unknown"),
+            },
         }
-
         return dict_output
+
