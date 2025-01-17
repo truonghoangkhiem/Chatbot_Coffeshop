@@ -63,11 +63,21 @@ class GuardAgent:
 
     def postprocess(self, output):
         try:
-            output = output.strip()  # Thử chuyển đổi chuỗi JSON thành object
-            output = output.replace("'", "'")
+            output = output.strip()
             if not output.endswith("}"):
                 output += "}"
             json_object = json.loads(output)
+            
+            # Kiểm tra nếu "message" trống khi decision là "not allowed"
+            if json_object.get("decision") == "not allowed" and not json_object.get("message"):
+                json_object["message"] = "Sorry, I can't help with that. Can I help you with your order?"
+
+            # Kiểm tra các khóa cần thiết
+            required_keys = ["decision", "message"]
+            for key in required_keys:
+                if key not in json_object:
+                    raise ValueError(f"Missing required key: {key} in JSON response")
+
         except json.JSONDecodeError as e:
             print(f"JSON Decode Error: {e}")
             print(f"Invalid JSON received: {output}")
