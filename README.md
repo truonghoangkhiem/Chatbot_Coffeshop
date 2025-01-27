@@ -92,6 +92,12 @@ npm install -g expo-cli
 
 ## 1. Clone the Repository from GitHub
 
+Navigate to the project directory:
+
+```bash
+cd Chatbot_Coffeshop\frontend
+```
+
 ## 2. Install Dependencies
 
 Run the following command to install the required libraries:
@@ -127,6 +133,10 @@ npm start
 - Requires macOS and Xcode installed.
 
 - Press `i` in the terminal to run the app on the iOS Simulator.
+
+## Web:
+
+- Press `w` in the terminal to run the app on the iOS Simulator.
 
 ## 🔗 Refrence Links
 
