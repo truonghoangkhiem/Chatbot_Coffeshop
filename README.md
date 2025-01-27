@@ -70,7 +70,7 @@ The agents work collaboratively in a pipeline architecture to process user input
 
 Each folder has their own getting started section. So this way we can deploy the front end, backend and setup individually.
 
-# Guide to Running a React Native Project on Expo Platform
+# 🚀 Guide to Running a React Native Project on Expo Platform
 
 ## System Requirements
 
