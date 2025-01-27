@@ -70,29 +70,29 @@ The agents work collaboratively in a pipeline architecture to process user input
 
 Each folder has their own getting started section. So this way we can deploy the front end, backend and setup individually.
 
-## Guide to Running a React Native Project on Expo Platform
+# Guide to Running a React Native Project on Expo Platform
 
-# System Requirements
+## System Requirements
 
-1. Node.js: Install Node.js from nodejs.org (LTS version recommended).
+**1.Node.js**: Install Node.js from nodejs.org (LTS version recommended).
 
-2. ** Expo CLI ** : Install Expo CLI globally using npm or yarn:
+**2.Expo CLI** : Install Expo CLI globally using npm or yarn:
 
 ```bash
 npm install -g expo-cli
 ```
 
-3. # Emulator or Mobile Device:
+## 3. Emulator or Mobile Device:
 
 - For Android: Android Emulator or Expo Go app (download from Google Play).
 
 - For iOS: iOS Simulator (requires macOS) or Expo Go app (download from App Store).
 
-# Steps to Run the Project
+## Steps to Run the Project
 
-# 1. Clone the Repository from GitHub
+## 1. Clone the Repository from GitHub
 
-# 2. Install Dependencies
+## 2. Install Dependencies
 
 Run the following command to install the required libraries:
 
@@ -100,7 +100,7 @@ Run the following command to install the required libraries:
 npm install
 ```
 
-# 3. Start the Project with Expo
+## 3. Start the Project with Expo
 
 Run:
 
@@ -108,21 +108,21 @@ Run:
 npm start
 ```
 
-# 4. Connect to a Mobile Device or Emulator
+## 4. Connect to a Mobile Device or Emulator
 
-# Mobile Device:
+## Mobile Device:
 
 - Open the Expo Go app.
 
 - Scan the QR code displayed in Expo Dev Tools or in the terminal.
 
-# Android Emulator:
+## Android Emulator:
 
 - Ensure the Android Emulator is running.
 
 - Press `a` in the terminal to run the app on the Android Emulator.
 
-# iOS Simulator:
+## iOS Simulator:
 
 - Requires macOS and Xcode installed.
 
