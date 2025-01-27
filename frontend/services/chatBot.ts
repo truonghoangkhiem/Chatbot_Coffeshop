@@ -10,7 +10,8 @@ async function callChatBotAPI(messages: MessageInterface[]): Promise<MessageInte
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${API_KEY}`
-            }
+            },
+            timeout: 200000
         });
         
         let output = response.data;
