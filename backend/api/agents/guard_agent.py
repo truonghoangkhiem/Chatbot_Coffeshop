@@ -44,8 +44,8 @@ class GuardAgent:
             - Do NOT add any extra newline characters before or after the JSON.
 
 
-             Your output should be in a structured json format like so. each key is a string and each value is a string. Make sure to follow the format exactly:
-             {
+            Your output should be in a structured json format like so. each key is a string and each value is a string. Make sure to follow the format exactly:
+            {
             "chain of thought": "go over each of the points above and make see if the message lies under this point or not. Then you write some your thoughts about what point is this input relevant to."
             "decision": "allowed" or "not allowed". Pick one of those. and only write the word.
             "message": leave the message empty if it's allowed, otherwise write "Sorry, I can't help with that. Can I help you with your order?"
